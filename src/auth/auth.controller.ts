@@ -7,15 +7,10 @@ import { MessagePattern } from '@nestjs/microservices';
 export class AuthController {
   constructor(
     private readonly authService: AuthService) {}
-  
+
   @UseGuards(LocalAuthGuard)
-  @MessagePattern({ role: 'auth', cmd: 'login' })
-  async login(data: any) {
-    return this.authService.login(data.user)
-  }
-  
   @Post('auth')
-  async loginAPI(@Request() req) {
+  async login(@Request() req) {
     return this.authService.login(req.user);
   }
 
